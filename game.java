@@ -1,5 +1,10 @@
 package wordleGamePackage;
 
+/**
+*
+* @author = Zachary Priano + Syed Mujibur Rahman (Mujib) 
+*/
+
 import java.util.Scanner;
 
 public class game {
@@ -89,23 +94,91 @@ public class game {
 //		}
 //	}
 //	
+	public int letterProcessing(String rightword, char letter, int i)
+	{
+		int letterstatus = 0;
+
+		if (rightword.charAt(i) == letter)
+		{
+			letterstatus = 1;
+		}
+		else
+		{
+			for (int j = 0; j < rightword.length(); j++)
+			{
+				if (rightword.charAt(j) == letter)
+				{
+					letterstatus = 2;
+				}
+			}
+		}
+		return letterstatus;
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		String gameWord = "Apple";
-		char[] userInput; 
 		int round = 0;
-		boolean won= false;
-		boolean lost= false;
+		// boolean won= false;
+		// boolean lost= false;
+		char[] attempt;
+		int letterProcessed = -1;
+		int Correctct = 0;
 		
 		//gameWord = readTxtFile();
 		
 		game myGame = new game(gameWord); //constructs a game object initialized with a hidden wordle word "apple"
 		System.out.println(myGame.word); //myGame is successfully initialized with the hardcoded hidden word. TODO read in hidden word from file.
 		
-		myGame.callWin(myGame.word, myGame.readWordInput(0));
-		System.out.println("\n");
+		for (round = 0; round < 2; round++)
+		{ 
+			attempt = myGame.readWordInput(round);
+					
+			for (int i = 0; i < 5; i++)
+			{
+				letterProcessed = myGame.letterProcessing(myGame.word, attempt[i], i);
+				if (letterProcessed == 0)
+				{
+					//System.out.println("WPWL"); 
+					
+				}
+				else if (letterProcessed == 1)
+				{
+					//System.out.println("RPRL");
+					Correctct += 1;
+				}
+				else 
+				{
+					//System.out.println("WPRL");
+				}
+			}
+			
+			if (Correctct == 5)
+			{
+				System.out.println("You Won!!");
+				//won = myGame.callWin();
+				break;
+			}
+			
+			Correctct = 0;
+		}
 		
-		myGame.callLose(myGame.word, myGame.readWordInput(0));
+//		if (won == 0)
+//		{
+//			System.out.println("You Lost!!");
+//			
+//			//lost = myGame.callLose();
+//		}
+		
+		// myGame.callExitView(won or lost);
+			
+		//
+		
+//		myGame.callWin(myGame.word, myGame.readWordInput(0));
+//		System.out.println("\n");
+//		
+//		myGame.callLose(myGame.word, myGame.readWordInput(0));
 		
 //		
 //		while (won == false || lost == false)
