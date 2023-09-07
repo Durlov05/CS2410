@@ -1,10 +1,6 @@
 package wordleGamePackage;
 
-/**
-*
-* @author = Zachary Priano + Syed Mujibur Rahman (Mujib) 
-*/
-
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class game {
@@ -122,7 +118,8 @@ public class game {
 		int round = 0;
 		// boolean won= false;
 		// boolean lost= false;
-		char[] attempt;
+		char[] attempt = new char[5];
+		char[][] board = new char[6][5];
 		int letterProcessed = -1;
 		int Correctct = 0;
 		
@@ -134,10 +131,16 @@ public class game {
 		for (round = 0; round < 2; round++)
 		{ 
 			attempt = myGame.readWordInput(round);
+			
+			for (int m = 0; m < 5; m++)
+			{
+				board[round][m] = attempt[m];
+			}
+						
 					
 			for (int i = 0; i < 5; i++)
 			{
-				letterProcessed = myGame.letterProcessing(myGame.word, attempt[i], i);
+				letterProcessed = myGame.letterProcessing(myGame.word, board[round][i], i);
 				if (letterProcessed == 0)
 				{
 					//System.out.println("WPWL"); 
@@ -164,6 +167,8 @@ public class game {
 			Correctct = 0;
 		}
 		
+		
+		System.out.println("The board looks like: " + Arrays.toString(board));
 //		if (won == 0)
 //		{
 //			System.out.println("You Lost!!");
