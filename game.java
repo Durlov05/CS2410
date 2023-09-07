@@ -122,13 +122,14 @@ public class game {
 		char[][] board = new char[6][5];
 		int letterProcessed = -1;
 		int Correctct = 0;
+		String tempString ="";
 		
 		//gameWord = readTxtFile();
 		
 		game myGame = new game(gameWord); //constructs a game object initialized with a hidden wordle word "apple"
 		System.out.println(myGame.word); //myGame is successfully initialized with the hardcoded hidden word. TODO read in hidden word from file.
 		
-		for (round = 0; round < 2; round++)
+		for (round = 0; round < 6; round++)
 		{ 
 			attempt = myGame.readWordInput(round);
 			
@@ -157,6 +158,14 @@ public class game {
 				}
 			}
 			
+			tempString += "\n";
+			for (int n = 0; n < board[0].length; n++)
+			{
+				tempString += " | " + (board[round][n]);
+			}
+			
+			System.out.println("The board looks like: " + tempString +"\n");
+			
 			if (Correctct == 5)
 			{
 				System.out.println("You Won!!");
@@ -168,7 +177,6 @@ public class game {
 		}
 		
 		
-		System.out.println("The board looks like: " + Arrays.toString(board));
 //		if (won == 0)
 //		{
 //			System.out.println("You Lost!!");
